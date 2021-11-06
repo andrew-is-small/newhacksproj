@@ -23,4 +23,6 @@ def make_request(method):
     # get corresponding command
     command = CommandConstants().get(method)
     if command is not None:
-        command.run()
+        output = command.run()
+    # output will either be none or json will this work...
+    return output

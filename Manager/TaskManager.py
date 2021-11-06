@@ -16,6 +16,7 @@ class TaskManager(Gettable, Saveable):
     """
 
     def __init__(self, task_type, title="", notes="", due_date=None):
+        self.task_type = task_type
         if task_type is "project":
             self.maintask = ProjectTask(title, notes, due_date)
         if task_type is "daily":

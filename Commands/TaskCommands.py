@@ -11,8 +11,11 @@ from Entity.BasicTask import BasicTask
 from Entity.BigTask import BigTask
 from Entity.Task import Task
 from Manager.TaskManager import TaskManager
+from Manager.TaskSorter import sort_tasks
 
 current_task_id = 0
+
+
 # This technically is Dependency Inversion cuz we rely on Task and BigTask, which are abstract classes uh yeah.
 # I am cool.
 
@@ -26,6 +29,8 @@ class Command:
         """
         pass
 
+
+# Modifying Commands
 
 class CreateTaskCommand(Command):
     def run(self, args: Dict):
@@ -118,3 +123,28 @@ class ChangeTitleCommand(Command):
         task = ts.get_by_id(args['id'])
         if isinstance(task, Task):
             task.change_title(args['newtitle'])
+
+
+# Fetching Commands
+
+class FetchSortedCommand(Command):
+    def run(self, args: Dict = None):
+        """
+        Returns a dictionary that maps "project" to a list of projecttask taskmanagers, sorted in order of date.
+        Also maps "daily" in the same way
+        No args required
+        :param args:
+        :return:
+        """
+        # all bigtasks(task manager) should be stored in TaskStorage
+        ts = TaskStorage.get_instance()
+        ret_dict = dict()
+        for key in ts.tasks:
+            tm = ts.tasks[key]  # this is a taskmanager
+            if tm.task_type not in ret_dict:
+                ret_dict[tm.task_type] = [tm]
+            else:
+                ret_dict[tm.task_type].append(tm)
+        for key in ret_dict:
+            ret_dict[key] = sort_tasks(ret_dict[key])
+        return ret_dict
