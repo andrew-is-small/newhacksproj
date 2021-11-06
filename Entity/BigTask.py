@@ -16,6 +16,7 @@ class BigTask(Task):
         self.complete = False
         self.due_date = due_date
         self.subtasks = []
+        super().__init__()
 
     def get_progress(self) -> float:
         # return float btwn 0 and 1 that represents how complete this task is.
