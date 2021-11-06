@@ -12,10 +12,10 @@ class TaskManager(Gettable):
     - giving up data
     - keeps track of due date.
     """
-    def complete_subtask(self, id) -> None:
+    def complete_subtask(self, task_id) -> None:
         """
         Completes a subtask. You are able to select subtask by id
-        :param id:
+        :param task_id:
         :return:
         """
         pass
