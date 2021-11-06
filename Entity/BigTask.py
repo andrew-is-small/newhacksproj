@@ -65,5 +65,9 @@ class BigTask(Task):
     def is_completed(self) -> bool:
         """
         return whether the task is completed if and only if all subtasks are completed
-        :return: 
+        :return: bool
         """
+        for taskies in self.subtasks:
+            if not taskes.is_completed:
+                return False
+        return True

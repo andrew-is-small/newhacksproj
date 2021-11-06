@@ -8,6 +8,5 @@ class DailyTask(BigTask):
     """
     Daily tasks. List of daily tasks basically
     """
-    subtasks: List[BasicTask]
-
-    pass
+    def __init__(self):
+        super().__init__()
