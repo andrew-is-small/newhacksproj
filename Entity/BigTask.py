@@ -26,7 +26,7 @@ class BigTask(Task):
         """
         :return:
         """
-        pass
+        return self.subtasks
 
     def get_notes(self) -> str:
         """
@@ -50,13 +50,13 @@ class BigTask(Task):
         """
         self.due_date = date
 
-    def add_notes(self) -> None:
+    def add_notes(self, addednotes) -> None:
         """
         Abstract method
         Mutates notes
         :return: None
         """
-        pass
+        self.notes = addednotes
 
     def is_completed(self) -> bool:
         pass
