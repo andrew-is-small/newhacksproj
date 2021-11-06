@@ -8,10 +8,10 @@ class BasicTask(Task):
     def __init__(self):
         super().__init__()
 
-    def complete(self) -> bool:
-        self.complete = True
+    def completed(self) -> bool:
+        self.completed = True
 
     def is_completed(self) -> bool:
-        return self.complete
+        return self.completed
 
     def get_due_date(self) -> None:
