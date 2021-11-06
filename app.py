@@ -16,6 +16,7 @@ print('yo app is shit.')
 
 # we'll do a /<method> post request, that will just make a corresponding command object with method and params
 # that will run
+# How will we give data to the guy tho wtfff
 
 @app.route('/<method>', methods=['POST'])
 def make_request(method):

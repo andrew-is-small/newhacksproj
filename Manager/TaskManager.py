@@ -15,11 +15,14 @@ class TaskManager(Gettable, Saveable):
     - keeps track of due date.
     """
 
-    def __init__(self, type, task_id, title="", notes="", due_date=None):
-        if type is ProjectTask:
-            self.maintask = ProjectTask(task_id, title, notes, due_date)
-        if type is DailyTask:
-            self.maintask = DailyTask(task_id, title, notes, due_date)
+    def __init__(self, task_type, title="", notes="", due_date=None):
+        if task_type is "project":
+            self.maintask = ProjectTask(title, notes, due_date)
+        if task_type is "daily":
+            self.maintask = DailyTask(title, notes, due_date)
+
+    def get_due_date(self):
+        return self.maintask.due_date
 
     def add_subtask(self, sub) -> None:
         """
@@ -38,7 +41,9 @@ class TaskManager(Gettable, Saveable):
         self.maintask.subtasks.pop(task_id)
 
     def get_subtask(self, task_id):
-        return self.maintask.subtasks[task_id]
+        if task_id in self.maintask.subtasks:
+            return self.maintask.subtasks[task_id]
+        return None
 
     def complete_subtask(self, task_id) -> None:
         """
@@ -46,14 +51,14 @@ class TaskManager(Gettable, Saveable):
         :param task_id:
         :return:
         """
-        self.maintask.subtasks[task_id].complete
+        self.maintask.subtasks[task_id].complete()
 
     def complete_task(self) -> None:
         """
         Completes the entire task.
         :return:
         """
-        self.maintask.complete
+        self.maintask.complete()
 
     def get_basic_data(self):
         """

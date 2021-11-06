@@ -11,7 +11,7 @@ class Task:
         self.completed = False
         self.title = title
         self.complete = False
-        self.id = TaskStorage.get_id()
+        self.id = TaskStorage.generate_id()
 
     def complete(self) -> None:
         """

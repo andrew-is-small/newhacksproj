@@ -10,14 +10,15 @@ class BigTask(Task):
     still pretty abstract tho
     """
 
-    def __init__(self, title="", notes="", due_date=None):
+    def __init__(self, title="", notes="", due_date=""):
         super().__init__(title)
         self.notes = notes
         self.due_date = due_date
-        self.subtasks = []
+        self.subtasks = dict()
 
     def add_subtask(self, title):
-        self.subtasks.append(BasicTask(title))
+        a = BasicTask(title=title)
+        self.subtasks[a.id] = a
 
     def get_progress(self) -> float:
         # return float btwn 0 and 1 that represents how complete this task is.
