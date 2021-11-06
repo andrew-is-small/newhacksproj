@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 from flask_socketio import SocketIO, send
 
 from Commands.CommandConstants import CommandConstants
@@ -21,8 +21,15 @@ print('yo app is shit.')
 @app.route('/<method>', methods=['POST'])
 def make_request(method):
     # get corresponding command
-    command = CommandConstants().get(method)
-    if command is not None:
-        output = command.run()
-    # output will either be none or json will this work...
-    return output
+    try:
+        command = CommandConstants().get(method)
+        data = request.form
+        args = data.to_dict(flat=False)
+        # form arguments using arguments passed in.
+        output = None
+        if command is not None:
+            output = command.run(args)
+        # output will either be none or json will this work...
+        return "" if output is None else output
+    except Exception as e:
+        return "you fucked it my guy"

@@ -10,4 +10,4 @@ class BasicTask(Task):
         super().__init__(title)
 
     def is_completed(self) -> bool:
-        return super().completed
+        return super().completed()

@@ -76,4 +76,7 @@ class TaskManager(Gettable, Saveable):
         :return:
         """
 
+    def get_id(self):
+        pass
+
     pass

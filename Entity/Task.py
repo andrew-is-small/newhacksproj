@@ -8,10 +8,9 @@ class Task:
     """
 
     def __init__(self, title=""):
-        self.completed = False
         self.title = title
         self.complete = False
-        self.id = TaskStorage.generate_id()
+        self.id = TaskStorage.get_instance().generate_id()
 
     def complete(self) -> None:
         """

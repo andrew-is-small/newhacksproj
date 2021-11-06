@@ -46,8 +46,6 @@ class CreateTaskCommand(Command):
         """
         # get the single taskStorage object
         ts = TaskStorage.get_instance()
-        if args['duedate'] == "":
-            args['duedate'] = None
 
         # create a task
         tm = TaskManager(args['type'], args['title'], args['notes'], args['duedate'])
@@ -68,7 +66,7 @@ class CreateSubtaskCommand(Command):
         ts = TaskStorage.get_instance()
         # get task corresponding to id(in args)
         task = ts.get_by_id(args['id'])
-        if isinstance(task, BigTask):
+        if isinstance(task, TaskManager):
             task.add_subtask(BasicTask(args['title']))
         # no need to add to storage because it mutates something already in the storage I think
 
