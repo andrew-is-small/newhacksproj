@@ -13,6 +13,7 @@ class TaskManager(Gettable, Saveable):
     - giving up data
     - keeps track of due date.
     """
+
     def __init__(self, type, title="", notes="", due_date=None):
         if type is ProjectTask:
             self.maintask = ProjectTask(title, notes, due_date)
@@ -22,14 +23,21 @@ class TaskManager(Gettable, Saveable):
     def add_subtask(self, sub) -> None:
         """
         Adds a subtask to the substask list
-        :param sub:
+        :param sub is a basic task
         :return: None
         """
         self.maintask.subtasks.append(sub)
 
-    def remove_subtask(self, task_id):
-        
+    def remove_subtask(self, task_id) -> None:
+        """
+        Task_id is simply the index
+        :param task_id:
+        :return:
+        """
+        self.maintask.subtasks.pop(task_id)
+
     def get_subtask(self, task_id):
+        return self.maintask.subtasks[task_id]
 
     def complete_subtask(self, task_id) -> None:
         """
@@ -60,4 +68,5 @@ class TaskManager(Gettable, Saveable):
         no idea what the return format is yet.
         :return:
         """
+
     pass
