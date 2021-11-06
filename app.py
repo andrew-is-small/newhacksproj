@@ -1,13 +1,9 @@
-from flask import Flask, send_from_directory, request
-from flask_socketio import SocketIO, send
+from flask import Flask, request
 
 from Commands.CommandConstants import CommandConstants
-from Commands.IdMaker import tid
 from Commands.TaskCommands import FetchSortedCommand
 from Commands.TaskStorage import TaskStorage
-from Entity.Task import Task
 from Manager.Derived import Gettable
-from Manager.TaskManager import TaskManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
