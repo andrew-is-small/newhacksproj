@@ -1,6 +1,6 @@
 from typing import List
 
-from Entity.BasicTask import BasicTask
+from Entity.RegularTask import RegularTask
 from Entity.BigTask import BigTask
 
 

@@ -7,7 +7,7 @@ Commands related to tasks
 from typing import Dict
 
 from Commands.TaskStorage import TaskStorage
-from Entity.BasicTask import BasicTask
+from Entity.RegularTask import RegularTask
 from Entity.BigTask import BigTask
 from Entity.Task import Task
 from Manager.TaskManager import TaskManager
@@ -67,7 +67,7 @@ class CreateSubtaskCommand(Command):
         # get task corresponding to id(in args)
         task = ts.get_by_id(args['id'])
         if isinstance(task, TaskManager):
-            task.add_subtask(BasicTask(args['title']))
+            task.add_subtask(RegularTask(args['title']))
         # no need to add to storage because it mutates something already in the storage I think
 
 

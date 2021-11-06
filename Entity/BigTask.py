@@ -1,5 +1,5 @@
 from typing import List
-from BasicTask import BasicTask
+from RegularTask import RegularTask
 from Entity.Task import Task
 
 
@@ -17,7 +17,7 @@ class BigTask(Task):
         self.subtasks = dict()
 
     def add_subtask(self, title):
-        a = BasicTask(title=title)
+        a = RegularTask(title=title)
         self.subtasks[a.id] = a
 
     def get_progress(self) -> float:
@@ -28,7 +28,7 @@ class BigTask(Task):
                 completed += 1
         return completed / len(self.subtasks)
 
-    def get_subtasks(self) -> List[BasicTask]:
+    def get_subtasks(self) -> List[RegularTask]:
         """
         :return:
         """

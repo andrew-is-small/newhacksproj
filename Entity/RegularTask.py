@@ -1,7 +1,7 @@
 from Entity.Task import Task
 
 
-class BasicTask(Task):
+class RegularTask(Task):
     """
     Basic task. No subtasks, has a title and can be completed.
     """
