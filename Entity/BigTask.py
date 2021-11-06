@@ -57,3 +57,6 @@ class BigTask(Task):
         :return: None
         """
         pass
+
+    def is_completed(self) -> bool:
+        pass
