@@ -9,7 +9,7 @@ from Manager.TaskManager import TaskManager
 class TaskStorage:
     # WCS, make this not a singleton but just kinda ensure there's only one of them lol
 
-    tasks: Dict[TaskManager]
+    tasks: Dict[str, TaskManager]
 
     def __init__(self):
         # we're going to map taskManager ids to the actual taskManager
