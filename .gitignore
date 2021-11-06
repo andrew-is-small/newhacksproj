@@ -2,3 +2,6 @@
 .idea/misc.xml
 .idea/
 *.xml
+*.iml
+.idea/newhacksproj.iml
+*.xml
