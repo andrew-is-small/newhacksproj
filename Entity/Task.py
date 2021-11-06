@@ -17,13 +17,13 @@ class Task:
         """
         self.complete = True
 
-    def uncompleted(self) -> None:
+    def uncomplete(self) -> None:
         """
         abstract method
         Mutate self.complete from true to false
         :return:
         """
-        pass
+        self.complete = False
 
     # make sure you throw appropriate exceptions
     def get_title(self) -> str:
