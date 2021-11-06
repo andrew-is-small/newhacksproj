@@ -1,15 +1,14 @@
 class Task:
     """
     Abstract Class
+    No due dates and notes for basic tasks
     """
 
-    def __init__(self, title, notes="", due_date=None):
+    def __init__(self, title="",):
         self.title = title
-        self.notes = notes
         self.complete = False
-        self.due_date = due_date
 
-    def completed(self) -> None:
+    def complete(self) -> None:
         """
         abstract method
         Mutate self.complete from false to true
@@ -38,36 +37,6 @@ class Task:
         """
         Abstract method
         :return: True or false based on whether task is completed
-        """
-        pass
-
-    def get_notes(self) -> str:
-        """
-        Abstract method
-        :return: notes for the task as a string. If no notes return ""
-        """
-        return self.notes
-
-    def get_due_date(self) -> None:
-        """
-        Abstract method
-        :return: a date. THINK OF THIS LATER
-        """
-        return self.due_date
-
-    def add_due_date(self) -> None:
-        """
-        Abstract method
-        Mutates due_date
-        :return: None
-        """
-        pass
-
-    def add_notes(self) -> None:
-        """
-        Abstract method
-        Mutates notes
-        :return: None
         """
         pass
 
