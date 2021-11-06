@@ -11,12 +11,13 @@ class BigTask(Task):
     """
 
     def __init__(self, title="", notes="", due_date=None):
-        self.title = title
+        super().__init__(title)
         self.notes = notes
-        self.complete = False
         self.due_date = due_date
         self.subtasks = []
-        super().__init__()
+
+    def add_subtask(self, title):
+        self.subtasks.append(BasicTask(title))
 
     def get_progress(self) -> float:
         # return float btwn 0 and 1 that represents how complete this task is.
@@ -68,6 +69,6 @@ class BigTask(Task):
         :return: bool
         """
         for taskies in self.subtasks:
-            if not taskes.is_completed:
+            if not taskies.is_completed:
                 return False
-        return True
+        return self.complete

@@ -5,8 +5,9 @@ class BasicTask(Task):
     """
     Basic task. No subtasks, has a title and can be completed.
     """
-    def __init__(self):
-        super().__init__()
+
+    def __init__(self, title=""):
+        super().__init__(title)
 
     def is_completed(self) -> bool:
-        return self.completed
+        return super().completed

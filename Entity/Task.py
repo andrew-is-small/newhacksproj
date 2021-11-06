@@ -1,12 +1,17 @@
+from Commands.TaskStorage import TaskStorage
+
+
 class Task:
     """
     Abstract Class
     No due dates and notes for basic tasks
     """
 
-    def __init__(self, title="",):
+    def __init__(self, title=""):
+        self.completed = False
         self.title = title
         self.complete = False
+        self.id = TaskStorage.get_id()
 
     def complete(self) -> None:
         """
