@@ -4,6 +4,9 @@ from flask_socketio import SocketIO, send
 from Commands.CommandConstants import CommandConstants
 from Commands.IdMaker import tid
 from Commands.TaskStorage import TaskStorage
+from Entity.Task import Task
+from Manager.Derived import Gettable
+from Manager.TaskManager import TaskManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
@@ -32,4 +35,32 @@ def make_request(method):
         # output will either be none or json will this work...
         return "" if output is None else output
     except Exception as e:
-        return "you fucked it my guy"
+        return str(e)
+
+
+@app.route('/alldata/<taskid>', methods=['GET'])
+def fetch_task(taskid):
+    try:
+        ts = TaskStorage.get_instance()
+        t = ts.get_by_id(taskid)
+        # scuffed af
+        if isinstance(t, Gettable):
+            return t.get_data()
+        else:
+            return "didn't get none"
+    except Exception as e:
+        return str(e)
+
+
+@app.route('/basicdata/<taskid>', methods=['GET'])
+def fetch_basic(taskid):
+    try:
+        ts = TaskStorage.get_instance()
+        t = ts.get_by_id(taskid)
+        # scuffed af
+        if isinstance(t, Gettable):
+            return t.get_basic_data()
+        else:
+            return "didn't get none"
+    except Exception as e:
+        return str(e)

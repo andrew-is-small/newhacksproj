@@ -3,7 +3,6 @@
 # THIS IS THE CLASS THAT IS GOING TO GET SAVED I GUESS
 from typing import Dict
 
-import Commands.TaskStorage
 from Manager.TaskManager import TaskManager
 
 
@@ -12,24 +11,8 @@ class TaskStorage:
 
     tasks: Dict[TaskManager]
 
-    __instance = None
-
-    @staticmethod
-    def get_instance():
-        if TaskStorage.__instance is None:
-            TaskStorage.__instance = TaskStorage()
-        return TaskStorage.__instance
-
-    @staticmethod
-    def set_instance(ts: Commands.TaskStorage.TaskStorage):
-        # idk if this will work tbh
-        if TaskStorage.__instance is None:
-            TaskStorage.__instance = ts
-
     def __init__(self):
         # we're going to map taskManager ids to the actual taskManager
-        if TaskStorage.__instance is not None:
-            return
         self.tasks = dict()
         self.current_id = 0
 
@@ -39,7 +22,8 @@ class TaskStorage:
 
     def get_by_id(self, task_id):
         """
-        Gets a task by task_id. Looks inside all tasks and subtasks
+        Gets a task by task_id. Looks inside all tasks and subtasks.
+        Returns either a taskManager, or a BasicTask
         :param task_id:
         :return:
         """
@@ -51,15 +35,5 @@ class TaskStorage:
             if a.get_subtask(task_id) is not None:
                 return a.get_subtask(task_id)
         return None
-
-    def generate_id(self):
-        """
-        Generates a new id.
-        :return:
-        """
-        current_id = self.current_id
-        self.current_id += 1
-        return current_id
-
     # I want the capability to return a dict that's like Daily:[id1, id2, ...], Project. These have to be sorted.
     # cuz then we can fetch each of those by id and present them

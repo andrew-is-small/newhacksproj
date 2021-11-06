@@ -1,4 +1,4 @@
-from Commands.TaskStorage import TaskStorage
+import uuid
 
 
 class Task:
@@ -10,7 +10,7 @@ class Task:
     def __init__(self, title=""):
         self.title = title
         self.complete = False
-        self.id = TaskStorage.get_instance().generate_id()
+        self.id = uuid.uuid4()
 
     def complete(self) -> None:
         """
@@ -51,4 +51,3 @@ class Task:
         :return: None
         """
         self.title = newtitle
-

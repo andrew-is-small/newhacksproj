@@ -11,3 +11,17 @@ class RegularTask(Task):
 
     def is_completed(self) -> bool:
         return super().completed()
+
+    def get_basic_data(self):
+        """
+        Gives up its basic data, such as title, progress, completion.
+        :return:
+        """
+        pass
+
+    def get_data(self):
+        """
+        Gives up its own data. Do not know the data structure tho.
+        :return:
+        """
+        pass
