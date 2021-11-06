@@ -10,7 +10,7 @@ class BigTask(Task):
     still pretty abstract tho
     """
 
-    def __init__(self, title, notes="", due_date=None):
+    def __init__(self, title="", notes="", due_date=None):
         self.title = title
         self.notes = notes
         self.complete = False
