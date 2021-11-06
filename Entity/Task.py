@@ -9,7 +9,6 @@ class Task:
 
     def __init__(self, title=""):
         self.title = title
-        self.complete = False
         self.id = uuid.uuid4()
 
     def complete(self) -> None:
@@ -18,7 +17,7 @@ class Task:
         Mutate self.complete from false to true
         :return: None
         """
-        self.complete = True
+        pass
 
     def uncomplete(self) -> None:
         """
@@ -26,7 +25,7 @@ class Task:
         Mutate self.complete from true to false
         :return:
         """
-        self.complete = False
+        pass
 
     # make sure you throw appropriate exceptions
     def get_title(self) -> str:

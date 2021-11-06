@@ -15,18 +15,26 @@ class BigTask(Task):
         self.notes = notes
         self.due_date = due_date
         self.subtasks = dict()
+        self.is_checked = 0
 
     def add_subtask(self, title):
         a = RegularTask(title=title)
         self.subtasks[a.id] = a
+        return a.id
+
+    def remove_subtask(self, id):
+        if id in self.subtasks:
+            self.subtasks.pop(id)
 
     def get_progress(self) -> float:
         # return float btwn 0 and 1 that represents how complete this task is.
         completed = 0
-        for taskies in self.subtasks:
-            if taskies.is_completed:
-                completed += 1
-        return completed / len(self.subtasks)
+        if self.subtasks:
+            for key in self.subtasks:
+                if self.subtasks[key].is_completed():
+                    completed += 1
+            return completed / len(self.subtasks)
+        return self.is_checked
 
     def get_subtasks(self) -> List[RegularTask]:
         """
@@ -63,6 +71,14 @@ class BigTask(Task):
         :return: None
         """
         self.notes = addednotes
+
+    def complete(self) -> None:
+        self.is_checked = True
+        for task in self.subtasks:
+            self.subtasks[task].complete()
+
+    def uncomplete(self) -> None:
+        self.is_checked = False
 
     def is_completed(self) -> bool:
         """

@@ -6,7 +6,7 @@ from Entity.DailyTask import DailyTask
 from Entity.ProjectTask import ProjectTask
 
 
-def test_1():
+def test_regulartaskmethods():
     task1 = RegularTask("shit on andrew")
     assert task1.is_completed() is False
 
@@ -14,6 +14,54 @@ def test_1():
     task1.complete()
     assert task1.is_completed() is True
 
+    task1 = RegularTask("shit on andrew")
+    task1.complete()
+    task1.uncomplete()
+    assert task1.is_completed() is False
+
+    task1 = RegularTask("shit on andrew")
+    assert task1.title == "shit on andrew"
+
+    task1 = RegularTask("shit on andrew")
+    task1.change_title("shit on and")
+    assert task1.title == "shit on and"
+
+
+def test_dailytastmethods():
+    daily1 = DailyTask("wee wee andrew", "andeew is gong", "Oct 24 2002")
+    daily1.change_title("poodrew")
+    assert daily1.title == "poodrew"
+    assert daily1.due_date == "poodrew"
+
+    daily1 = DailyTask("wee wee andrew", "andeew is gong", "Oct 24 2002")
+    daily1.add_due_date("poodrew")
+    assert daily1.title == "poodrew"
+    assert daily1.due_date == "poodrew"
+
+
+def test_dailybigmethods():
+    daily1 = DailyTask("wee wee andrew", "andeew is gong", "Oct 24 2002")
+    assert daily1.notes == "andeew is gong"
+    assert daily1.due_date == "Oct 24 2002"
+    assert daily1.subtasks == dict()
+    assert daily1.get_progress() == 0
+    task_id = daily1.add_subtask("bint")
+    assert daily1.get_subtasks()[task_id].get_title() == "bint"
+    task_id2 = daily1.add_subtask("bint2")
+    assert daily1.get_progress() == 0
+    daily1.subtasks[task_id].complete()
+    assert daily1.get_progress() == 0.5
+    daily1.complete()
+    assert daily1.get_progress() == 1
+    assert daily1.subtasks[task_id2].is_completed()
+
+def test_dailyremovetask():
+    daily1 = DailyTask("wee wee andrew", "andeew is gong", "Oct 24 2002")
+    task_id = daily1.add_subtask("bint")
+    task_id2 = daily1.add_subtask("bint2")
+    assert daily1.subtasks == {"task_id": "bint", "task_id2": "bint2"}
+    daily1.remove_subtask(task_id)
+    assert daily1.subtasks == {"task_id": "bint"}
 
 if __name__ == "__main__":
     import pytest

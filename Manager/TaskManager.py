@@ -25,13 +25,13 @@ class TaskManager(Gettable, Saveable):
     def get_due_date(self):
         return self.maintask.due_date
 
-    def add_subtask(self, sub) -> None:
+    def add_subtask(self, title) -> None:
         """
         Adds a subtask to the substask list
         :param sub is a basic task im guessing
         :return: None
         """
-        self.maintask.subtasks.append(sub)
+        self.maintask.add_subtask(title)
 
     def remove_subtask(self, task_id) -> None:
         """
@@ -39,12 +39,10 @@ class TaskManager(Gettable, Saveable):
         :param task_id:
         :return:
         """
-        self.maintask.subtasks.pop(task_id)
+        self.maintask.remove_subtask(task_id)
 
     def get_subtask(self, task_id):
-        if task_id in self.maintask.subtasks:
-            return self.maintask.subtasks[task_id]
-        return None
+        return self.maintask.subtasks[task_id]
 
     def complete_subtask(self, task_id) -> None:
         """
@@ -77,6 +75,6 @@ class TaskManager(Gettable, Saveable):
         """
 
     def get_id(self):
-        pass
+        return self.maintask.id
 
     pass

@@ -8,9 +8,16 @@ class RegularTask(Task):
 
     def __init__(self, title=""):
         super().__init__(title)
+        self.is_complete = False
 
     def is_completed(self) -> bool:
-        return super().completed()
+        return self.is_complete
+
+    def complete(self) -> None:
+        self.is_complete = True
+
+    def uncomplete(self) -> None:
+        self.is_complete = False
 
     def get_basic_data(self):
         """
