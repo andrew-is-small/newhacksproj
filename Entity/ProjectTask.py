@@ -5,4 +5,5 @@ class ProjectTask(BigTask):
     """
     A project, with subtasks and shit
     """
-    pass
+    def __init__(self):
+        super().__init__()
