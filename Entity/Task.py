@@ -23,7 +23,7 @@ class Task:
         Mutate self.complete from true to false
         :return:
         """
-        self.complete = False
+        pass
 
     # make sure you throw appropriate exceptions
     def get_title(self) -> str:
@@ -39,7 +39,7 @@ class Task:
         Abstract method
         :return: True or false based on whether task is completed
         """
-        return self.complete
+        pass
 
     def get_notes(self) -> str:
         """
