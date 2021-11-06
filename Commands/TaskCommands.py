@@ -19,6 +19,10 @@ current_task_id = 0
 # This technically is Dependency Inversion cuz we rely on Task and BigTask, which are abstract classes uh yeah.
 # I am cool.
 
+# task storage
+# set it if we have data saved yeah
+TASK_STORAGE = TaskStorage.get_instance()
+
 
 class Command:
     def run(self, args: Dict):
@@ -45,7 +49,7 @@ class CreateTaskCommand(Command):
         :return:
         """
         # get the single taskStorage object
-        ts = TaskStorage.get_instance()
+        ts = TASK_STORAGE
 
         # create a task
         tm = TaskManager(args['type'], args['title'], args['notes'], args['duedate'])
@@ -63,7 +67,7 @@ class CreateSubtaskCommand(Command):
         :param args:
         :return:
         """
-        ts = TaskStorage.get_instance()
+        ts = TASK_STORAGE
         # get task corresponding to id(in args)
         task = ts.get_by_id(args['id'])
         if isinstance(task, TaskManager):
@@ -81,7 +85,7 @@ class CompleteTaskCommand(Command):
         :return:
         """
         # get the task
-        ts = TaskStorage.get_instance()
+        ts = TASK_STORAGE
         task = ts.get_by_id(args['id'])
         if isinstance(task, Task):
             # run its complete method
@@ -100,7 +104,7 @@ class ChangeDateCommand(Command):
         """
         # get the task, change the date
         # get the task
-        ts = TaskStorage.get_instance()
+        ts = TASK_STORAGE
         task = ts.get_by_id(args['id'])
         if isinstance(task, BigTask):
             task.add_due_date(args['newdate'])
@@ -117,10 +121,23 @@ class ChangeTitleCommand(Command):
         :return:
         """
         # get the task, change the title
-        ts = TaskStorage.get_instance()
+        ts = TASK_STORAGE
         task = ts.get_by_id(args['id'])
         if isinstance(task, Task):
             task.change_title(args['newtitle'])
+
+
+class DeleteTaskCommand(Command):
+    def run(self, args: Dict):
+        """
+        Deletes a command
+        Args requires
+        - id(id of the thing to be deleted)
+        :param args:
+        :return:
+        """
+        ts = TASK_STORAGE
+        ts.delete_task(args["id"])
 
 
 # Fetching Commands
@@ -135,7 +152,7 @@ class FetchSortedCommand(Command):
         :return:
         """
         # all bigtasks(task manager) should be stored in TaskStorage
-        ts = TaskStorage.get_instance()
+        ts = TASK_STORAGE
         ret_dict = dict()
         for key in ts.tasks:
             tm = ts.tasks[key]  # this is a taskmanager

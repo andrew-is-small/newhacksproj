@@ -17,6 +17,9 @@ print('yo app is shit.')
 
 
 # initialize task storage
+# see this is where we would load a taskstorage if we could but u know...
+TASK_STORAGE = TaskStorage()
+
 
 # we'll do a /<method> post request, that will just make a corresponding command object with method and params
 # that will run

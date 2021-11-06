@@ -33,13 +33,13 @@ class TaskManager(Gettable, Saveable):
         """
         self.maintask.add_subtask(title)
 
-    def remove_subtask(self, task_id) -> None:
+    def remove_subtask(self, task_id) -> bool:
         """
         Task_id is simply the index
         :param task_id:
-        :return:
+        :return: if we removed anything
         """
-        self.maintask.remove_subtask(task_id)
+        return self.maintask.remove_subtask(task_id)
 
     def get_subtask(self, task_id):
         return self.maintask.subtasks[task_id]

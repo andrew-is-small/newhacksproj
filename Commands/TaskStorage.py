@@ -8,17 +8,42 @@ from Manager.TaskManager import TaskManager
 
 class TaskStorage:
     # WCS, make this not a singleton but just kinda ensure there's only one of them lol
+    __instance = None
+
+    @staticmethod
+    def get_instance():
+        if TaskStorage.__instance is None:
+            TaskStorage.__instance = TaskStorage()
+        return TaskStorage.__instance
+
+    @staticmethod
+    def set_instance(ts):
+        if TaskStorage.__instance is None:
+            TaskStorage.__instance = ts
 
     tasks: Dict[str, TaskManager]
 
     def __init__(self):
         # we're going to map taskManager ids to the actual taskManager
+        if self.__instance is None:
+            return
         self.tasks = dict()
         self.current_id = 0
 
     def add_task(self, tm: TaskManager):
         if tm.get_id() not in self.tasks:
             self.tasks[tm.get_id()] = tm
+
+    def delete_task(self, task_id):
+        if task_id in self.tasks:
+            self.tasks.pop(task_id)
+            return
+        else:
+            for key in self.tasks:
+                tm = self.tasks[key]
+                if tm.remove_subtask(task_id):
+                    return
+                # if the thing returns true, we shit on it
 
     def get_by_id(self, task_id):
         """

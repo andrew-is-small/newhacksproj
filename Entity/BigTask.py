@@ -22,9 +22,11 @@ class BigTask(Task):
         self.subtasks[a.id] = a
         return a.id
 
-    def remove_subtask(self, id):
-        if id in self.subtasks:
-            self.subtasks.pop(id)
+    def remove_subtask(self, tid) -> bool:
+        if tid in self.subtasks:
+            self.subtasks.pop(tid)
+            return True
+        return False
 
     def get_progress(self) -> float:
         # return float btwn 0 and 1 that represents how complete this task is.
