@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
 from Manager.Gettable import Gettable
-=======
 from Manager.Derived import Gettable, Saveable
->>>>>>> Stashed changes
 
 
 class TaskManager(Gettable, Saveable):
