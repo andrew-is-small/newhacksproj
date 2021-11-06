@@ -19,3 +19,12 @@ class Gettable:
         :return:
         """
         pass
+
+
+class Saveable:
+    def get_id(self) -> str:
+        """
+        gets id of the object
+        :return:
+        """
+        pass

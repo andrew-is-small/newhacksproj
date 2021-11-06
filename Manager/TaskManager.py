@@ -1,4 +1,4 @@
-from Manager.Gettable import Gettable
+from Manager.Derived import Gettable
 
 
 class TaskManager(Gettable):
