@@ -1,3 +1,4 @@
+# I DONT THINK THIS IS NECESSARY ANYMORE
 class Request:
     """
     Processes request strings, turning it into an object.
