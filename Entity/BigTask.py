@@ -10,7 +10,7 @@ class BigTask(Task):
     still pretty abstract tho
     """
 
-    def __init__(self, title, notes="", due_date=None):
+    def __init__(self, title="", notes="", due_date=None):
         self.title = title
         self.notes = notes
         self.complete = False
@@ -65,5 +65,9 @@ class BigTask(Task):
     def is_completed(self) -> bool:
         """
         return whether the task is completed if and only if all subtasks are completed
-        :return: 
+        :return: bool
         """
+        for taskies in self.subtasks:
+            if not taskes.is_completed:
+                return False
+        return True
