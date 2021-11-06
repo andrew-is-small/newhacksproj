@@ -14,12 +14,18 @@ class TaskManager(Gettable, Saveable):
     - keeps track of due date.
     """
     def __init__(self, type, title="", notes="", due_date=None):
-        if self.type is ProjectTask:
+        if type is ProjectTask:
             self.maintask = ProjectTask(title, notes, due_date)
-        if self.type is DailyTask:
+        if type is DailyTask:
             self.maintask = DailyTask(title, notes, due_date)
 
-    def add_subtask(self):
+    def add_subtask(self, sub) -> None:
+        """
+        Adds a subtask to the substask list
+        :param sub:
+        :return: None
+        """
+        self.maintask.subtasks.append(sub)
 
     def remove_subtask(self, task_id):
         
