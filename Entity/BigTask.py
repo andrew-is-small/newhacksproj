@@ -20,7 +20,11 @@ class BigTask(Task):
 
     def get_progress(self) -> float:
         # return float btwn 0 and 1 that represents how complete this task is.
-        pass
+        completed = 0
+        for taskies in self.subtasks:
+            if taskies.is_completed:
+                completed += 1
+        return completed / len(self.subtasks)
 
     def get_subtasks(self) -> List[BasicTask]:
         """
@@ -59,4 +63,7 @@ class BigTask(Task):
         self.notes = addednotes
 
     def is_completed(self) -> bool:
-        pass
+        """
+        return whether the task is completed if and only if all subtasks are completed
+        :return: 
+        """
