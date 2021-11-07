@@ -4,6 +4,7 @@
 from typing import Dict
 
 from Manager.TaskManager import TaskManager
+from Manager.TaskSorter import sort_tasks
 
 
 class TaskStorage:
@@ -25,10 +26,19 @@ class TaskStorage:
 
     def __init__(self):
         # we're going to map taskManager ids to the actual taskManager
-        if self.__instance is None:
+        if self.__instance is not None:
             return
         self.tasks = dict()
         self.current_id = 0
+        self.current_viewing = None
+
+    def get_current_viewing(self):
+        return self.current_viewing
+
+    def view(self, task_id):
+        if task_id in self.tasks:
+            self.current_viewing = self.tasks[task_id]
+            print("setting viewing page")
 
     def add_task(self, tm: TaskManager):
         if tm.get_id() not in self.tasks:
@@ -37,6 +47,8 @@ class TaskStorage:
     def delete_task(self, task_id):
         if task_id in self.tasks:
             self.tasks.pop(task_id)
+            if self.current_viewing is not None and self.current_viewing.id == task_id:
+                self.current_viewing = None
             return
         else:
             for key in self.tasks:
@@ -56,9 +68,21 @@ class TaskStorage:
         if task_id in self.tasks:
             return self.tasks[task_id]
         for key in self.tasks:
-            a = self.tasks[key] # a taskManager
+            a = self.tasks[key]  # a taskManager
             if a.get_subtask(task_id) is not None:
                 return a.get_subtask(task_id)
         return None
+
+    def fetch_sorted(self):
+        ret_dict = dict()
+        for key in self.tasks:
+            tm = self.tasks[key]  # this is a taskmanager
+            if tm.task_type not in ret_dict:
+                ret_dict[tm.task_type] = [tm]
+            else:
+                ret_dict[tm.task_type].append(tm)
+        for key in ret_dict:
+            ret_dict[key] = sort_tasks(ret_dict[key])
+        return ret_dict
     # I want the capability to return a dict that's like Daily:[id1, id2, ...], Project. These have to be sorted.
     # cuz then we can fetch each of those by id and present them

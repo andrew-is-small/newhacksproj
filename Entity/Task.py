@@ -9,7 +9,7 @@ class Task:
 
     def __init__(self, title=""):
         self.title = title
-        self.id = uuid.uuid4()
+        self.id = str(uuid.uuid4())
 
     def complete(self) -> None:
         """

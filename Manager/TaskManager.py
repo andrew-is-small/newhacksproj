@@ -17,10 +17,17 @@ class TaskManager(Gettable, Saveable):
 
     def __init__(self, task_type, title="", notes="", due_date=None):
         self.task_type = task_type
-        if task_type is "project":
+        if task_type == "project":
             self.maintask = ProjectTask(title, notes, due_date)
-        if task_type is "daily":
+        if task_type == "daily":
             self.maintask = DailyTask(title, notes, due_date)
+        self.id = self.get_id()
+
+    def __str__(self):
+        return "[TM]" + self.maintask.title
+
+    def get_title(self):
+        return self.maintask.get_title()
 
     def get_due_date(self):
         return self.maintask.due_date
@@ -28,7 +35,7 @@ class TaskManager(Gettable, Saveable):
     def add_subtask(self, title) -> str:
         """
         Adds a subtask to the substask list
-        :param sub is a basic task im guessing
+        :param title:
         :return: None
         """
         return self.maintask.add_subtask(title)
@@ -76,9 +83,15 @@ class TaskManager(Gettable, Saveable):
         no idea what the return format is yet.
         :return:
         """
-        listdata = []
-        return listdata.append(self.maintask.title, self.maintask.notes, self.maintask.due_date,
-                               self.maintask.subtasks, self.maintask.is_checked, self.maintask.id)
+        ret_dict = dict()
+        ret_dict['title'] = self.get_title()
+        ret_dict['id'] = self.get_id()
+        ret_dict['duedate'] = self.maintask.due_date
+        ret_dict['progress'] = str(float(self.get_progress())*100)
+        ret_dict['subtasks'] = []
+        for task in self.maintask.get_subtasks():
+            ret_dict['subtasks'].append(task.title)
+        return ret_dict
 
     def get_id(self):
         return self.maintask.id

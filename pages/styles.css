@@ -1,0 +1,100 @@
+.flexbox-container {
+    display: flex;
+}
+
+/* Below are styles for inidividual boxes */
+
+.flexbox-item {
+    width: 200px;
+    margin: 10px;
+    border: 3px solid rgb(21, 16, 90);
+    background-color: rgb(214, 210, 210);
+}
+
+.flexbox-item-1 {
+    min-height: 100px;
+    width: 70%;
+}
+
+.flexbox-item-2 {
+    min-height: 200px;
+}
+
+.flexbox-item-3 {
+    min-height: 300px;
+}
+
+.shopItem {
+    margin: 30px;
+}
+
+.shopItemTitle {
+    display: block;
+    /* "display: block" makes item on its own line */
+
+    width: 100%;
+    text-align: center;
+    /* properly places text */
+
+    font-weight: bold;
+    font-size: 1.25em;
+    color: rgb(167, 23, 23);
+    margin-bottom: 15px;
+}
+
+.shopItemImage {
+    height: 250px;
+    width: 350px;
+}
+
+.shopItemDetail{
+    display: flex;
+    align-items: center;
+    /* properly aligns text and button */
+
+    padding: 5px;
+}
+
+.shopItemPrice {
+    flex-grow: 1;
+    color: rgb(167, 23, 23);
+}
+
+.shopItems { /* Note: not the same as "shopItem" */
+    display: flex;
+    /* moves everything into one horizontal line*/
+
+    flex-wrap: wrap;
+    /* makes line wrap around the web page */
+
+    justify-content: space-around;
+    /* creates space around each item */
+}
+
+.shopMedicalBackground {
+    background-image: url("Images/Mass\ Effect\ Medical\ Shop.png");
+    background-color: rgba(0, 0, 0, .7);
+    background-blend-mode: multiply;
+    background-size: cover;
+    /*
+    background-color: rgb(66, 29, 4);
+    background-size: cover; 
+    */
+    
+    padding-top: 30px;
+    padding-bottom: 30px;     
+}
+
+.shopGeneralBackground {
+    background-image: url("Images/Mass\ Effect\ Omega\ Shop.jpg");
+    background-color: rgba(0, 0, 0, .7);
+    background-blend-mode: multiply;
+    background-size: cover;
+    /*
+    background-color: rgb(66, 29, 4);
+    background-size: cover; 
+    */
+    
+    padding-top: 30px;
+    padding-bottom: 30px; 
+}

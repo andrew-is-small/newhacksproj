@@ -31,4 +31,8 @@ class RegularTask(Task):
         Gives up its own data. Do not know the data structure tho.
         :return:
         """
-        pass
+        ret_dict = {
+            "title": self.title,
+            "completion": self.is_complete,
+            "id": self.id
+        }

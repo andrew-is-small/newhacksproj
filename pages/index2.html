@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>App Home Page</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        
+
+
+        <header>
+            <nav class="navbar navbar-dark bg-dark">
+                <a href="#" class="navbar-brand">New Name</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Create Task</a>
+                    </li>
+                </ul>
+            </nav>            
+        </header>
+
+        <section class="generalSection">          
+            
+            <a href="#popupE">New Task</a>
+
+            <div id="popupE" class="overlay">
+                <div class="popup">
+                  <a class="close" href="#">&times;</a>
+                  <br>
+                  <div style="margin-top: 2%;"class="content">
+                    <form method="POST" action="/createtask">        
+                      <div>New Task</div>
+
+                      <!--
+                          Beloe, "name" attribute should be what is referenced in the backend
+                      -->
+                      <div class="justify-content-center">
+                        <input class="form-control" type="text" placeholder="Type" name="type" required>
+                      </div>
+                      <div class="justify-content-center">
+                        <input class="form-control" type="text" placeholder="Title" name="title" required>
+                      </div>
+                      <div class="justify-content-center">
+                        <input class="form-control" type="text" placeholder="Notes" name="notes" required>
+                      </div>
+                      <div class="justify-content-center">
+                        <input class="form-control" type="text" placeholder="Due Date" name="duedate" required>
+                      </div>
+                      <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                    </form>
+                  </div>
+                </div>                  
+            </div>
+            
+            <div class="flexbox-container">
+
+                <!--This is the tasks box-->
+                <div class="shopItem flexbox-item flexbox-item-1">
+                    <h3 class="shopItemTitle">{{current_viewing.title + '(' + current_viewing.progress + '%)'}}</h3>
+                        <div class="shopItemDetail">
+                            <table>
+                                <tbody>
+                                {% for dic in current_viewing.subtasks %}
+                                <tr>
+                                    <!--Add EJS here so that for loop will actually display all projects passed in from backend-->
+                                        <td>{{dic.title}}</td>
+                                        <!--form method="GET" action="{{'/deletetask?id='}}">
+                                            <td><button class="tinyBtn font" type="submit">Delete</button></td>
+                                        </form>
+
+                                        <br>
+
+                                        <form method="GET" action="{{'/completetask?id='}}">
+                                            <td><button class="tinyBtn font" type="submit">Complete</button></td>
+                                        </form-->
+
+
+                                </tr>
+
+                                {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+                </div>
+
+                <div class="shopItems">
+                    <div class="shopItem flexbox-item flexbox-item-2">
+                        <span class="shopItemTitle">Projects</span>
+
+                        <div class="shopItemDetail">
+                            <table>
+                                <tbody>
+                                {% for dic in projects %}
+                                <tr>
+                                    <!--Add EJS here so that for loop will actually display all projects passed in from backend-->
+                                        <td>{{dic.title + '(' + dic.progress + '%)'}}</td>
+                                        <form method="GET" action="{{'/cmd/view?id=' + dic.id}}">
+                                            <input type="hidden" name="id" value="{{dic.id}}" />
+                                            <td><button class="tinyBtn font" type="submit">View</button></td>
+                                        </form>
+
+                                        <form method="GET" action="{{'/cmd/deletetask?id=' + dic.id}}">
+                                            <input type="hidden" name="id" value="{{dic.id}}" />
+                                            <td><button class="tinyBtn font" type="submit">Delete</button></td>
+                                        </form>
+
+                                        <br>
+
+                                        <form method="GET" action="{{'/cmd/completetask?id=' + dic.id}}">
+                                            <input type="hidden" name="id" value="{{dic.id}}}" />
+                                            <td><button class="tinyBtn font" type="submit">Complete</button></td>
+                                        </form>
+
+
+                                </tr>
+
+                                {% endfor %}
+                                </tbody>
+
+                            </table>                            
+                        </div>
+
+                    </div>
+
+                    <div class="shopItem flexbox-item flexbox-item-2">
+                        <span class="shopItemTitle">Daily Tasks</span>
+                        <div class="shopItemDetail">
+                            <table>
+                                    {% for dic in daily %}
+                                <tr>
+                                    <!--Add EJS here so that for loop will actually display all projects passed in from backend-->
+                                        <td>{{dic.title + '(' + dic.progress + '%)'}}</td>
+                                        <form method="GET" action="{{'/cmd/view?id=' + dic.id}}">
+                                            <input type="hidden" name="id" value="{{dic.id}}" />
+                                            <td><button class="tinyBtn font" type="submit">View</button></td>
+                                        </form>
+
+                                        <form method="GET" action="{{'/cmd/deletetask?id=' + dic.id}}">
+                                            <input type="hidden" name="id" value="{{dic.id}}" />
+                                            <td><button class="tinyBtn font" type="submit">Delete</button></td>
+                                        </form>
+
+                                        <br>
+
+                                        <form method="GET" action="{{'/cmd/completetask?id=' + dic.id}}">
+                                            <input type="hidden" name="id" value="{{dic.id}}}" />
+                                            <td><button class="tinyBtn font" type="submit">Complete</button></td>
+                                        </form>
+
+
+                                </tr>
+
+                                {% endfor %}
+                            </table>                            
+                        </div>           
+                    </div>
+                </div>
+            </div>
+
+        </section>   
+
+    </body>
+        
+    
+</html>

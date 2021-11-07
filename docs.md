@@ -46,6 +46,10 @@ changes the title of a task(any task, by id)
 deletes a task of any kind by id
 - id(id of the task to delete)
 
+"view"
+views a project/daily task by id
+- id(id of the thing to view)
+
 ### Fetching(get request)
 
 "/alldata/[taskid]"

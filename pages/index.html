@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>App Home Page</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+
+
+        <header>
+            <nav class="navbar navbar-dark bg-dark">
+                <a href="#" class="navbar-brand">New Name</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Link</a>
+                    </li>
+                </ul>
+            </nav>            
+        </header>
+
+        <section class="generalSection">     
+            
+            <div class="flexbox-container">
+
+                <!--This is the tasks box-->
+                <div class="shopItem flexbox-item flexbox-item-1">
+                    <h3 class="shopItemTitle">Current Task</h3>
+
+                    <!--Insert ejs here-->
+                </div>
+
+                <div class="shopItems">
+                    <div class="shopItem flexbox-item flexbox-item-2">
+                        <span class="shopItemTitle">Projects</span>
+
+                        <div class="shopItemDetail">
+                            <table>
+                                <tbody>
+                                {% for task in projects %}
+                                <tr>
+                                    <td>{{task.get_title()}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tfoot>
+                            </table>                            
+                        </div>
+
+                    </div>
+
+                    <div class="shopItem flexbox-item flexbox-item-2">
+                        <span class="shopItemTitle">Daily Tasks</span>
+                        <div class="shopItemDetail">
+                            <table>
+                                <tbody>
+                                {% for task in daily %}
+                                <tr>
+                                    <td>{{task.get_title()}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tfoot>
+                            </table>                            
+                        </div>           
+                    </div>
+                </div>
+            </div>
+
+        </section>   
+        
+        
+
+    </body>
+</html>

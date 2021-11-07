@@ -1,7 +1,7 @@
 from typing import Optional
 
 from Commands.TaskCommands import CreateTaskCommand, CreateSubtaskCommand, CompleteTaskCommand, Command, \
-    ChangeDateCommand, ChangeTitleCommand, DeleteTaskCommand
+    ChangeDateCommand, ChangeTitleCommand, DeleteTaskCommand, SetViewCommand
 
 
 class CommandConstants:
@@ -13,6 +13,7 @@ class CommandConstants:
         self.command_dict['changedate'] = ChangeDateCommand()
         self.command_dict['changetitle'] = ChangeTitleCommand()
         self.command_dict['deletetask'] = DeleteTaskCommand()
+        self.command_dict['view'] = SetViewCommand()
 
     def get(self, method: str) -> Optional[Command]:
         if method in self.command_dict:

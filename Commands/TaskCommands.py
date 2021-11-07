@@ -15,7 +15,6 @@ from Manager.TaskSorter import sort_tasks
 
 current_task_id = 0
 
-
 # This technically is Dependency Inversion cuz we rely on Task and BigTask, which are abstract classes uh yeah.
 # I am cool.
 
@@ -136,8 +135,19 @@ class DeleteTaskCommand(Command):
         :param args:
         :return:
         """
-        ts = TASK_STORAGE
-        ts.delete_task(args["id"])
+        TASK_STORAGE.delete_task(args["id"])
+
+
+class SetViewCommand(Command):
+    def run(self, args: Dict):
+        """
+        Sets the current viewing tasks
+        Args requires
+        - id: id of the new viewing task
+        :param args:
+        :return:
+        """
+        TASK_STORAGE.view(args['id'])
 
 
 # Fetching Commands

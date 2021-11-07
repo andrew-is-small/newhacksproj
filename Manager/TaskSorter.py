@@ -11,7 +11,7 @@ def sort_tasks(lst: List[TaskManager]) -> List[TaskManager]:
     """
     # this might be faulty if some shitters have dates and some don't but yeah.
     lst2 = sorted(lst, key=lambda taskmanager: taskmanager.get_due_date(), reverse=True)
-    ret_lst = []
-    for a in lst2:
-        ret_lst.append(a.get_id())
-    return ret_lst
+    # ret_lst = []
+    # for a in lst2:
+    #     ret_lst.append(a.get_id())
+    return lst2
