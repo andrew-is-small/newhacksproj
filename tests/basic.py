@@ -4,6 +4,7 @@ from Entity.Task import Task
 from Entity.BigTask import BigTask
 from Entity.DailyTask import DailyTask
 from Entity.ProjectTask import ProjectTask
+from Manager.TaskManager import TaskManager
 
 
 def test_regulartaskmethods():
@@ -55,13 +56,38 @@ def test_dailybigmethods():
     assert daily1.get_progress() == 1
     assert daily1.subtasks[task_id2].is_completed()
 
+
 def test_dailyremovetask():
     daily1 = DailyTask("wee wee andrew", "andeew is gong", "Oct 24 2002")
     task_id = daily1.add_subtask("bint")
     task_id2 = daily1.add_subtask("bint2")
-    assert daily1.subtasks == {"task_id": "bint", "task_id2": "bint2"}
+    assert daily1.subtasks == {task_id: "bint", task_id2: "bint2"}
     daily1.remove_subtask(task_id)
     assert daily1.subtasks == {"task_id": "bint"}
+
+
+def test_taskmangage():
+    taskmanageobj = TaskManager("project", "proj1", "andrew huge ass", "Oct 24")
+    assert taskmanageobj.get_due_date == "Oct 24"
+    smackid = taskmanageobj.add_subtask("smack andrew")
+    assert taskmanageobj.get_subtask(smackid) == "smack andrew"
+    assert taskmanageobj.subtasks == {smackid: "smack andrew"}
+    assert taskmanageobj.get_progress() == 0
+    assert taskmanageobj.complete_subtask(smackid)
+    assert taskmanageobj.get_progress() == 1
+    assert taskmanageobj.is_completed() is True
+    taskmanageobj.remove_subtask(smackid)
+    assert taskmanageobj.subtasks == dict()
+
+
+def test_taskmangage2():
+    taskmanageobj = TaskManager("project", "proj1", "andrew huge ass", "Oct 24")
+    assert taskmanageobj.get_progress() == 0
+    taskmanageobj.complete_task()
+    assert taskmanageobj.get_progress() == 1
+    smackid = taskmanageobj.add_subtask("smack andrew")
+    assert taskmanageobj.get_progress() == 0
+
 
 if __name__ == "__main__":
     import pytest

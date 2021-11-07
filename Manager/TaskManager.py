@@ -25,13 +25,13 @@ class TaskManager(Gettable, Saveable):
     def get_due_date(self):
         return self.maintask.due_date
 
-    def add_subtask(self, title) -> None:
+    def add_subtask(self, title) -> str:
         """
         Adds a subtask to the substask list
         :param sub is a basic task im guessing
         :return: None
         """
-        self.maintask.add_subtask(title)
+        return self.maintask.add_subtask(title)
 
     def remove_subtask(self, task_id) -> bool:
         """
@@ -59,6 +59,9 @@ class TaskManager(Gettable, Saveable):
         """
         self.maintask.complete()
 
+    def get_progress(self) -> int:
+        return self.maintask.get_progress()
+
     def get_basic_data(self):
         """
         Gets the title, completion, progress and due date of the task I guess...
@@ -73,8 +76,10 @@ class TaskManager(Gettable, Saveable):
         no idea what the return format is yet.
         :return:
         """
+        listdata = []
+        return listdata.append(self.maintask.title, self.maintask.notes, self.maintask.due_date,
+                               self.maintask.subtasks, self.maintask.is_checked, self.maintask.id)
 
     def get_id(self):
         return self.maintask.id
 
-    pass
