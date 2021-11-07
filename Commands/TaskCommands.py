@@ -70,7 +70,7 @@ class CreateSubtaskCommand(Command):
         # get task corresponding to id(in args)
         task = ts.get_by_id(args['id'])
         if isinstance(task, TaskManager):
-            task.add_subtask(RegularTask(args['title']))
+            task.add_subtask(args['title'])
         # no need to add to storage because it mutates something already in the storage I think
 
 
@@ -86,7 +86,8 @@ class CompleteTaskCommand(Command):
         # get the task
         ts = TASK_STORAGE
         task = ts.get_by_id(args['id'])
-        if isinstance(task, Task):
+        if task is not None:
+            print("COMPLETING", task)
             # run its complete method
             task.complete()
 

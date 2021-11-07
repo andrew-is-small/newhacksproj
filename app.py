@@ -7,6 +7,8 @@ from Manager.Derived import Gettable
 from Manager.TaskManager import TaskManager
 
 # TODO fix delete, make the ability to make new tasks or something
+# TODO fix subtasks
+# TODO make ability to check off subtasks
 
 app = Flask(__name__, template_folder="pages")
 app.config['SECRET_KEY'] = 'mysecret'
@@ -48,6 +50,7 @@ def render_page():
     if current_viewing is None:
         current_viewing = {
             "title": "None",
+            "id": "",
             "progress": "0",
             "subtasks": []
         }

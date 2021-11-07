@@ -26,6 +26,9 @@ class RegularTask(Task):
         """
         pass
 
+    def get_title(self) -> str:
+        return self.title
+
     def get_data(self):
         """
         Gives up its own data. Do not know the data structure tho.
@@ -36,3 +39,4 @@ class RegularTask(Task):
             "completion": self.is_complete,
             "id": self.id
         }
+        return ret_dict

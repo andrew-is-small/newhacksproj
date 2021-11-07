@@ -59,7 +59,7 @@ class TaskManager(Gettable, Saveable):
         """
         self.maintask.subtasks[task_id].complete()
 
-    def complete_task(self) -> None:
+    def complete(self) -> None:
         """
         Completes the entire task.
         :return:
@@ -89,8 +89,11 @@ class TaskManager(Gettable, Saveable):
         ret_dict['duedate'] = self.maintask.due_date
         ret_dict['progress'] = str(float(self.get_progress())*100)
         ret_dict['subtasks'] = []
-        for task in self.maintask.get_subtasks():
-            ret_dict['subtasks'].append(task.title)
+        st_dict = self.maintask.get_subtasks()
+        for key in self.maintask.get_subtasks():
+            rt = st_dict[key]
+            print('found', rt.title)
+            ret_dict['subtasks'].append(st_dict[key].get_data())
         return ret_dict
 
     def get_id(self):

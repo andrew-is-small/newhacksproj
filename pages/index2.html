@@ -33,23 +33,23 @@
                   <a class="close" href="#">&times;</a>
                   <br>
                   <div style="margin-top: 2%;"class="content">
-                    <form method="POST" action="/createtask">        
+                    <form method="GET" action="/cmd/createtask">
                       <div>New Task</div>
 
                       <!--
                           Beloe, "name" attribute should be what is referenced in the backend
                       -->
                       <div class="justify-content-center">
-                        <input class="form-control" type="text" placeholder="Type" name="type" required>
+                        <input class="form-control" type="text" placeholder="Type[project/daily]" name="type" autocomplete="off" required>
                       </div>
                       <div class="justify-content-center">
-                        <input class="form-control" type="text" placeholder="Title" name="title" required>
+                        <input class="form-control" type="text" placeholder="Title" name="title" autocomplete="off" required>
                       </div>
                       <div class="justify-content-center">
-                        <input class="form-control" type="text" placeholder="Notes" name="notes" required>
+                        <input class="form-control" type="text" placeholder="Notes" name="notes" autocomplete="off">
                       </div>
                       <div class="justify-content-center">
-                        <input class="form-control" type="text" placeholder="Due Date" name="duedate" required>
+                        <input class="form-control" type="text" placeholder="Due Date" name="duedate" autocomplete="off">
                       </div>
                       <button type="submit" class="btn btn-lg btn-success">Submit</button>
                     </form>
@@ -59,16 +59,35 @@
             
             <div class="flexbox-container">
 
-                <!--This is the tasks box-->
+                <!--This is the current viewing box-->
                 <div class="shopItem flexbox-item flexbox-item-1">
                     <h3 class="shopItemTitle">{{current_viewing.title + '(' + current_viewing.progress + '%)'}}</h3>
                         <div class="shopItemDetail">
+                            <div>New Subtask</div>
+                            <form method="GET" action="/cmd/createsubtask">
+                                <input type="hidden" name="id" value="{{current_viewing.id}}"/>
+                                <input class="form-control" type="text" placeholder="Title" name="title" required>
+                                <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                            </form>
+                        </div>
+                        <div class="shopItemDetail">
                             <table>
                                 <tbody>
-                                {% for dic in current_viewing.subtasks %}
+                                {% for task in current_viewing.subtasks %}
                                 <tr>
                                     <!--Add EJS here so that for loop will actually display all projects passed in from backend-->
-                                        <td>{{dic.title}}</td>
+                                        {% if task.completion %}
+                                        <td>[complete]</td>
+                                        {% else %}
+                                        <td>
+                                            <form method="GET" action="/cmd/completetask">
+                                                <input type="hidden" name="id" value="{{task.id}}">
+                                                <button type="submit">Complete</button>
+                                            </form>
+                                        </td>
+                                        {% endif %}
+
+                                        <td>{{task.title}}</td>
                                         <!--form method="GET" action="{{'/deletetask?id='}}">
                                             <td><button class="tinyBtn font" type="submit">Delete</button></td>
                                         </form>
@@ -113,7 +132,7 @@
                                         <br>
 
                                         <form method="GET" action="{{'/cmd/completetask?id=' + dic.id}}">
-                                            <input type="hidden" name="id" value="{{dic.id}}}" />
+                                            <input type="hidden" name="id" value="{{dic.id}}" />
                                             <td><button class="tinyBtn font" type="submit">Complete</button></td>
                                         </form>
 
@@ -149,7 +168,7 @@
                                         <br>
 
                                         <form method="GET" action="{{'/cmd/completetask?id=' + dic.id}}">
-                                            <input type="hidden" name="id" value="{{dic.id}}}" />
+                                            <input type="hidden" name="id" value="{{dic.id}}" />
                                             <td><button class="tinyBtn font" type="submit">Complete</button></td>
                                         </form>
 
