@@ -23,8 +23,8 @@ TASK_STORAGE = TaskStorage.get_instance()
 
 
 def generate_random_tasks():
-    task1 = TaskManager("project", "make a sandwich", due_date="11/07")
-    task2 = TaskManager("daily", "eat lunch", due_date="11/07")
+    task1 = TaskManager("project", "Hackathon project", due_date="11/07")
+    task2 = TaskManager("daily", due_date="11/07")
     task1_id = task1.get_id()
     TASK_STORAGE.add_task(task1)
     TASK_STORAGE.add_task(task2)
@@ -52,7 +52,10 @@ def render_page():
             "title": "None",
             "id": "",
             "progress": "0",
-            "subtasks": []
+            "subtasks": [],
+            "pres": "",
+            "pres2": "",
+            "presf": ""
         }
     else:
         current_viewing = current_viewing.get_data()

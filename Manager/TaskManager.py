@@ -87,15 +87,22 @@ class TaskManager(Gettable, Saveable):
         ret_dict['title'] = self.get_title()
         ret_dict['id'] = self.get_id()
         ret_dict['duedate'] = self.maintask.due_date
-        ret_dict['progress'] = str(float(self.get_progress())*100)
+        ret_dict['progress'] = str(round(float(self.get_progress()) * 100))
         ret_dict['subtasks'] = []
         st_dict = self.maintask.get_subtasks()
         for key in self.maintask.get_subtasks():
             rt = st_dict[key]
             print('found', rt.title)
             ret_dict['subtasks'].append(st_dict[key].get_data())
+        a = ''
+        if len(ret_dict['title']) > 15:
+            a = '...'
+        ret_dict['pres'] = '[' + ret_dict['duedate'] + ']' + ret_dict['title'][:15] + a + '(' + \
+                           ret_dict['progress'] + '%)'
+        ret_dict['pres2'] = '[' + ret_dict['duedate'] + ']' + '(' + ret_dict['progress'] + '%)'
+        ret_dict['presf'] = '[' + ret_dict['duedate'] + ']' + ret_dict['title'] + '(' + \
+                            ret_dict['progress'] + '%)'
         return ret_dict
 
     def get_id(self):
         return self.maintask.id
-

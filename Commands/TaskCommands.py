@@ -86,6 +86,7 @@ class CompleteTaskCommand(Command):
         # get the task
         ts = TASK_STORAGE
         task = ts.get_by_id(args['id'])
+        print('[completetask] found', task)
         if task is not None:
             print("COMPLETING", task)
             # run its complete method

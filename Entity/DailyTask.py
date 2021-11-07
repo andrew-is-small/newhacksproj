@@ -10,6 +10,7 @@ class DailyTask(BigTask):
     """
     def __init__(self, title="", notes="", due_date=""):
         super().__init__(title, notes, due_date)
+        self.title = self.due_date
 
     def change_title(self, newtitle) -> None:
         """
