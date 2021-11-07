@@ -87,6 +87,9 @@ def test_taskmangage2():
     assert taskmanageobj.get_progress() == 1
     smackid = taskmanageobj.add_subtask("smack andrew")
     assert taskmanageobj.get_progress() == 0
+    taskmanageobj.complete_task()
+    assert taskmanageobj.get_progress() == 1
+    assert taskmanageobj.get_subtask(smackid).is_complete is True
 
 
 if __name__ == "__main__":
