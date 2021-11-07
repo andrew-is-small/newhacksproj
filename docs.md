@@ -42,6 +42,10 @@ changes the title of a task(any task, by id)
 - id(id of the task to change)
 - newtitle(new title)
 
+"deletetask"
+deletes a task of any kind by id
+- id(id of the task to delete)
+
 ### Fetching(get request)
 
 "/alldata/[taskid]"
